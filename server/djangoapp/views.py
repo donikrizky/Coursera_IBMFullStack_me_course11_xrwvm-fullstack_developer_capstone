@@ -14,7 +14,7 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate  # Uncomment this line
-from .models import CarMake, CarModel
+from .models import CarMake, CarModel, Dealership
 
 
 # Get an instance of a logger
@@ -93,7 +93,21 @@ def get_cars(request):
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
 # def get_dealerships(request):
-# ...
+def get_dealerships(request):
+    dealerships = Dealership.objects.all()
+    dealers_list = []
+    for dealer in dealerships:
+        dealers_list.append({
+            "id": dealer.id,
+            "name": dealer.name,
+            "address": dealer.address,
+            "city": dealer.city,
+            "state": dealer.state,
+            "zip": dealer.zip,
+            "lat": dealer.lat,
+            "long": dealer.long
+        })
+    return JsonResponse({"dealerships": dealers_list})
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 # def get_dealer_reviews(request,dealer_id):
