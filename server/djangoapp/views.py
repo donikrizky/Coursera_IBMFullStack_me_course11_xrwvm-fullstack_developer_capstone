@@ -13,7 +13,7 @@ from django.contrib.auth import login, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
-# from .populate import initiate
+from .populate import initiate  # Uncomment this line
 from .models import CarMake, CarModel
 
 
@@ -106,4 +106,3 @@ def get_cars(request):
 # Create a `add_review` view to submit a review
 # def add_review(request):
 # ...
-
